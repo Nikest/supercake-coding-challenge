@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@font-face {
+    font-family: "icon"; /* название твоего шрифта */
+    src: url("/fonts/icon.eot");
+    src: url("/fonts/icon.eot?#iefix") format("embedded-opentype"),
+    url("/fonts/icon.woff") format("woff"),
+    url("/fonts/icon.ttf") format("truetype"),
+    url("/fonts/icon.svg#icon") format("svg");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+[class*='icon-']:before {
+    font-family: "icon" !important;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    speak: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.icon-bird:before{content:'\0041';}
+.icon-cat:before{content:'\0042';}
+.icon-arrow-down:before{content:'\0043';}
+.icon-dog:before{content:'\0044';}
+.icon-hamster:before{content:'\0045';}
+.icon-rat:before{content:'\0046';}
+.icon-search:before{content:'\0047';}
+
+.transition-main {
+    transition: all 150ms ease;
+}
+
+.main-gradient {
+    background: linear-gradient(180deg,rgba(22, 123, 254, 1) 0%, rgba(19, 107, 222, 1) 20%, rgba(19, 105, 217, 1) 50%, rgba(19, 104, 215, 1) 80%, rgba(17, 97, 201, 1) 100%);
+}
+
+.main-gradient:hover {
+    background: #1369D9;
+}
+
+.popover-animation {
+    opacity: 0;
+    transform: scale(1, 0.85) translateY(-15%);
+
+    &[data-show="true"] {
+        pointer-events: all;
+        animation: popoverIn 250ms ease forwards;
+    }
+
+    &[data-show="false"] {
+        opacity: 0;
+        pointer-events: none;
+        animation: popoverOut 250ms ease forwards;
+    }
+}
+
+.popover-animation-render {
+    opacity: 1;
+    transform: scale(1, 1) translateY(0%);
+}
+
+.loading-animation {
+    animation: opacityAnimation 1.5s ease infinite;
+}
+
+@keyframes popoverIn {
+    0% {
+        opacity: 0;
+        transform: scale(1, 0.85) translateY(-15%);
+    }
+    20% {
+        opacity: 0;
+        transform: scale(1, 0.85) translateY(-15%);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1, 1) translateY(0%);
+    }
+}
+
+@keyframes popoverOut {
+    0% {
+        opacity: 1;
+        transform: scale(1, 1) translateY(0%);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1, 0.85) translateY(-15%);
+    }
+}
+
+@keyframes opacityAnimation {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 1;
+    }
+}
