@@ -16,6 +16,8 @@
 
 * Since I didn't have access to Figma DevTools, I tried to copy the colors and styles as close to the original as possible.
 
+* Added .env file with `NEXT_PUBLIC_URL=http://localhost:3000`
+
 ## Getting Started
 
 ```bash
