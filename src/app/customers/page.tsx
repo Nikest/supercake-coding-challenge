@@ -7,6 +7,7 @@ interface ISearchProps {
     species?: string;
 }
 
+
 const publicUrl = process.env.NEXT_PUBLIC_URL || 'http://localhost:3000';
 
 export default async function Page ({ searchParams }: { searchParams: Promise<ISearchProps> }) {
