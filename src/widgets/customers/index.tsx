@@ -1,60 +1,37 @@
 "use client";
 
-import { useState } from "react";
-import { Box, Title, Suspense, ErrorDisplay } from '@/components';
-import { SearchForm, ISearchData, CustomerInfo } from '@/modules';
-import { searchCustomer } from '@/actions';
-import { Customer } from '@/app/api/customers/route';
+import { Box, Title } from '@/components';
+import { SearchForm, ISearchData } from '@/modules';
+import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 
 export const Customers = () => {
-  const [hasError, setHasError] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [customers, setCustomers] = useState<Customer[]>([]);
+  const router = useRouter();
+  const pathname = usePathname();
+  const sp = useSearchParams();
 
   const handleSearch = (data: ISearchData) => {
-    setIsLoading(true);
+    const params = new URLSearchParams(sp);
 
-    searchCustomer(data).then((customers) => {
-      setCustomers(customers);
-      setIsLoading(false);
-      setHasError(false);
-    }).catch((e) => {
-      setHasError(e);
-      setIsLoading(false);
-      setCustomers([] as Customer[]);
-    });
+    if (data.search?.trim()) params.set("searchText", data.search.trim());
+    else params.delete("searchText");
+
+    if (data.animal?.length) params.set("species", data.animal.join(","));
+    else params.delete("species");
+
+    const qs = params.toString();
+    router.replace(qs ? `customers?${qs}` : pathname, { scroll: false });
   }
 
-  if (hasError) {
-    console.error('Error occurred', hasError);
-  }
 
   return (
     <section className="flex gap-big flex-col">
       <Box>
         <div className="flex flex-col gap-big">
           <Title>Customers and Pets</Title>
+
           <SearchForm onSearch={handleSearch} />
         </div>
       </Box>
-
-      {
-        !isLoading && hasError && (
-          <ErrorDisplay />
-        )
-      }
-
-      {
-        isLoading && (
-          <Suspense />
-        )
-      }
-
-      {
-        !isLoading && customers.map((customer) => (
-          <CustomerInfo key={customer.id} customer={customer} />
-        ))
-      }
     </section>
   )
 }

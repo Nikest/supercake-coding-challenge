@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Customers } from '@/widgets/customers';
 
 export const metadata: Metadata = {
   title: "Supercake Coding Challenge",
@@ -21,7 +22,13 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body>
-      <main className={"p-[54px]"}>{children}</main>
+      <main className={"p-[54px]"}>
+          <Customers />
+
+          <section className="flex gap-big flex-col mt-4">
+              {children}
+          </section>
+      </main>
       </body>
     </html>
   );

@@ -1,3 +1,5 @@
+"use client";
+
 import { IconFont, Box, Title } from '@/components';
 import { Customer } from '@/app/api/customers/route';
 

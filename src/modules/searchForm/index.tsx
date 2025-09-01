@@ -43,7 +43,7 @@ export const SearchForm: React.FC<IProps> = ({ onSearch }) => {
 
   const handleReset = () => {
     setHashState(Math.random());
-    setSearchData((state) => ({...state, animal: [] }));
+    setSearchData((state) => ({...state, animal: [], search: '' }));
   }
 
   const handleSearch = () => {
